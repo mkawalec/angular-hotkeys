@@ -349,13 +349,17 @@
           };
         }
 
-        if (typeof(action) === 'string') {
-          Mousetrap.bind(combo, wrapApply(callback), action);
-        } else {
-          Mousetrap.bind(combo, wrapApply(callback));
-        }
+        // Only add the shortcut, if this combo
+        // is not yet added
+        if (!_get(combo)) {
+          if (typeof(action) === 'string') {
+            Mousetrap.bind(combo, wrapApply(callback), action);
+          } else {
+            Mousetrap.bind(combo, wrapApply(callback));
+          }
 
-        scope.hotkeys.push(new Hotkey(combo, description, callback, action, allowIn, persistent));
+          scope.hotkeys.push(new Hotkey(combo, description, callback, action, allowIn, persistent));
+        }
       }
 
       /**
